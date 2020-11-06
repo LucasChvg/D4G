@@ -1,0 +1,217 @@
+html, body {
+	padding : 0;
+	margin: 0;
+	background: #bdd6e4;
+	text-decoration: none;
+	color: black;
+	text-align: left;
+}
+p, h3, h1 {
+	font-family: sans-serif;
+}
+a{
+	margin:auto;
+    color: white;
+	text-decoration:none;
+}
+header {
+    border-bottom: 2px solid #182628;
+    height: 120px;
+}
+#header_info{
+	height: 70px;
+	margin: auto;
+	text-align: center;
+}
+main{
+	margin: 0 auto;
+	background-color:#F4F4F4;
+}
+footer{
+    left: 0px;
+	position: static;
+    display: flex;
+    bottom: 0px;
+    height: 30px;
+    align-items: center;
+    width: 100%;
+    background-color: #286290;
+}
+.logoCours{ 
+	display:flex;
+	margin:auto;
+	padding : 15px;
+}
+.sommaireCours{
+	visibility: hidden;
+	text-align: center;
+	width: 33%;
+	margin: 0 20px;
+	padding:10px;
+	color:#FFFFFF;
+	-webkit-border-radius: 10;
+	-moz-border-radius: 10;
+	border-radius: 10px;
+}
+.ligneCours{
+	display:-webkit-flex;
+}
+article {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+#myButton {
+	background-color:#31708E;
+	border-radius:28px;
+	border:1px solid #31708E;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	margin: 3% 0;
+}
+
+#boxcom, #boxdep,#boxreg{
+	background-color:#31708E;
+}
+.information {
+	color: black;
+	text-align: left;
+	padding-left: 2%;
+	padding-right: 2%;
+	margin-inline-start: auto;
+}
+#div_mid_hidden, #div_btn, .select_top {
+	text-align: center;
+}
+.btn {
+	display: block;
+    display: inline-block;
+    margin: 4px auto 0;
+}
+#listdepartements, #listcommune,#recherchecommune, #myButton, #histo,#btn_cp, #h1histo {
+	display: none;
+}
+.description_resultats {
+	text-align: center;
+    margin: 0 6px;
+}
+
+#div_info {
+	margin:44px 0;
+}
+#listcommune, #listregions, #listdepartements, #choixCodePostal, #recherchecommune{
+	border-radius: 10px;
+    height: 30px;
+    text-align-last: center;
+	text-transform: capitalize;
+}
+#phraseDesc{
+  font-size: 20px;
+  text-align: center;
+}
+#table{
+	text-align: center;
+	margin: 1% 0;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #31708e;
+}
+/* The Modal (background) */
+.modal {
+  display: "block"; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  width: 100%;
+  text-align: center;
+}
+
+/* The Close Button */
+.close {
+  color: gray;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.btn-success{
+  background-color: #fefefe;
+  font-size: 16px;
+}
+
+.modal-body {
+	padding: 2px 16px;
+}
+.h3s {
+	font-weight: bold;
+	text-decoration: underline;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 900px) {
+	.information {
+		display: block;
+	}
+	.select_top{
+		display: grid;
+		margin-top: 15%;
+	}
+	#table {
+		display: none;
+	}
+	#listcommune, #listregions, #listdepartements, #recherchecommune{
+		width: 100%;
+		margin: 1% 0;
+	}
+	#choixCodePostal{
+		width: 98%;
+	}
+	.ligneCours{
+		display: block;
+	}
+	.sommaireCours{
+		width: auto;
+		margin-bottom: 5%;
+	}
+	header{
+		height: 170px;
+	}
+	
+}

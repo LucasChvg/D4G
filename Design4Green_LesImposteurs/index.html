@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title> Indice de fragilité numérique </title>
+        <link rel="stylesheet" type="text/css" href="style.css" /> 
+		<link rel="icon" href="images/favicon.ico" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> 
+        <script type="text/javascript" src="codepostaux.js"> </script>
+        <script type="text/javascript" src="indicedepartement.js"> </script>
+        <script type="text/javascript" src="indiceregions.js"> </script>
+        <script type="text/javascript" src="pdf.js"> </script>
+        <script type="text/javascript" src="jspdf.min.js"> </script>
+        <script type="text/javascript" src="fonction.js"> </script>
+		<script type="text/javascript" src="data.js"> </script>
+	</head>
+	<body>
+	<header>
+		<div id="header_info">
+			<div>
+				<h1>INDICE DE FRAGILITÉ NUMÉRIQUE</h1>
+			</div>
+			<div>
+				<p>Cet outil permet, que vous soyez une commune, un département ou une région de comparer votre indice de fragilité numérique avec les autres territoires.</p>
+			</div>
+		</div>
+	</header>
+		<div>
+			<div class="select_top">
+				<h3>Rechercher dans la liste: </h3>
+				<select id="listregions" classe="select_style" onchange="recupinfosregion();adddpt()" > 
+					<option value="">Select</option> 
+				</select>
+				<select id="listdepartements" classe="select_style" onchange="recupe();addcommune()"> 
+					<option value="">Select</option> 
+				</select> 
+		 		<select id="listcommune" classe="select_style" onchange="recupinfocommune();addbtn();addhisto()"> 
+					<option value="">Select</option> 
+				</select> 
+			</div>
+			<div class="select_top">
+				<h3>Recherche par code postal : </h3>
+				<input type="text" id="choixCodePostal" class="submit_on_enter">
+				<input type="submit" id="btn_cp" onclick="rechercher();addselectcommune()" value="rechercher">
+				<select id="recherchecommune" onchange="afficherInfoCommune(); addbtn()" ></select>
+			</div> 
+		</div>
+		<div id="div_mid_hidden">
+			
+			<p id="phraseDesc"></p>
+			<div class="ligneCours">
+				<div id="boxreg" class="sommaireCours">
+				<article>
+					<h3>Nom de la région : </h3><p id="region"></p>
+				</article>
+				<article>
+					<h3>Indice de fragilité de la région :</h3>
+					<p id="infosregion"></p>
+				</article>
+				<article>
+					<h3>Accès à l'information :</h3> 
+					<p id="accesinforeg"></p>
+				</article>
+				<article>
+					<h3>Accès aux interfaces numériques :</h3> 
+					<p id="accesinterfacereg"></p>
+				</article>
+				<article>
+					<h3>Capacité d'usage des interfaces numériques :</h3> 
+					<p id="capaciteusagereg"></p>
+				</article>
+				<article>
+					<h3>Compétences administratives :</h3>
+					<p id="competenceadminreg"></p>
+				</article>
+			</div>
+			<div id="boxdep" class="sommaireCours">
+				<article>
+					<h3>Nom du département :</h3>
+					<p id="departement"></p>
+				</article>
+				<article>
+					<h3>Indice de fragilité du département :</h3>
+					<p id="infosdepartement"> </p>
+				</article>
+				<article>
+					<h3>Accès à l'information :</h3> 
+					<p id="accesinfodep"></p>
+				</article>
+				<article>
+					<h3>Accès aux interfaces numériques :</h3>  
+					<p id="accesinterfacedep"></p>
+				</article>
+				<article>
+					<h3>Capacité d'usage des interfaces numériques :</h3> 
+					<p id="capaciteusagedep"></p>
+				</article>
+				<article>
+					<h3>Compétences administratives :</h3>
+					<p id="competenceadmindep"> </p>
+				</article>
+			</div>
+			<div id="boxcom" class="sommaireCours">
+				<article>
+					<h3>Nom de la commune : </h3><p id="commune"></p>
+				</article>
+				<article>
+					<h3>Indice de fragilité de la commune :</h3>
+					<p id="infos"></p>
+				</article>
+				<article>
+					<h3>Accès à l'information :</h3> 
+					<p id="accesinfocom"></p>
+				</article>
+				<article>
+					<h3>Accès aux interfaces numériques :</h3>  
+					<p id="accesinterfacecom"></p>
+				</article>
+				<article>
+					<h3>Capacité d'usage des interfaces numériques :</h3> 
+					<p id="capaciteusagecom"></p>
+				</article>
+				<article>
+					<h3>Compétences administratives :</h3>
+					<p id="competenceadmincom"></p>
+				</article>
+			</div>
+		</div>
+	</div>
+	<div id="div_btn">
+		<div class="btn">
+			<input id="myButton" type="button" onclick="enregister()" value="Enregistrer les données en PDF">
+		</div>
+	</div>
+	<div id="div_info">
+		
+		<div id="table">
+			<h1 id="h1histo">Historique</h1>
+			<table id="histo">
+				<tr>
+					<th>Commune</th>
+					<th>Label Iris</th>
+					<th>Score </th>
+					<th>Accès à l'information</th>
+					<th>Accès aux interfaces numériques</th>
+					<th>Capacité d'usage des interfaces numériques</th>
+					<th>Compétences administratives</th>
+				</tr>
+			</table>
+		</div>
+		<div class="ligneCours information">
+			<div class="description_resultats">
+				<h3 class="h3s">Accès à l'information</h3>
+				<p>Identifier des territoires mal couverts par une offre de service d'information ou des populations qui auront des difficultés à comprendre l'information.</p>
+			</div>
+			<div class="description_resultats">
+				<h3 class="h3s">Accès aux interfaces numériques</h3> 
+				<p>Identifier des territoires mal couverts par les réseaux ou dans lesquels des populations auront des difficultés financières à y accéder.</p>
+			</div>
+			<div class="description_resultats">
+				<h3 class="h3s">Capacité d'usage des interfaces numériques</h3> 
+				<p>Identifier des populations parmi lesquelles s'observe une fréquence d'illectronisme ou difficulté à utiliser internet. </p>
+			</div>
+			<div class="description_resultats">
+				<h3 class="h3s">Compétences administratives</h3>
+				<p>Identifier des populations parmi lesquelles s'observent des difficultés à accomplir des procédures administratives.</p>
+			</div>
+		</div>
+	</div>
+		<footer>
+			<a id="afooter" href="https://www.economie.gouv.fr/entreprises/site-internet-mentions-obligatoires">Mentions légales</a>
+		</footer>
+		<!-- Modal -->
+		<div id="myModal" class="modal">
+
+		  <!-- Modal content -->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <span class="close">&times;</span>
+			</div>
+			<div class="modal-body">
+			  <br> En continuant de naviguer sur ce site internet, vous acceptez que de possible cookies soient utilisés.<br> <br> <button id="btnDelete" type="submit" class="btn-success" onclick="addcookie()">J'accepte</button>
+			  <br>
+			  <br>
+			</div>
+		  </div>
+		</div>
+		<script>
+			function addcookie(){
+			document.cookie = 'ppkcookie1=testcookie; path=/'; 
+			}
+		</script>
+		<script>
+			function adddpt(){
+				var $listdpt = document.getElementById("listdepartements");
+				$listdpt.style.display="initial";
+			}
+			function addcommune(){
+				var $listcommune = document.getElementById("listcommune");
+				$listcommune.style.display="initial";
+			}	
+			function addbtn(){
+				var $btn = document.getElementById("myButton");
+				$btn.style.display="initial";
+			}
+			function addselectcommune(){
+				var $listselectcommune = document.getElementById("recherchecommune");
+				$listselectcommune.style.display="initial";
+			}
+			function addhisto(){
+				var $tabhisto = document.getElementById("histo");
+				var $h1 = document.getElementById("h1histo");
+				$h1.style.display="block";
+				$tabhisto.style.display="initial";
+			}			
+			var input = document.getElementById("choixCodePostal");
+			input.addEventListener("keyup", function(event) {
+			  if (event.keyCode === 13) {
+			   event.preventDefault();
+			   document.getElementById("btn_cp").click();
+			  }
+			});
+			
+		$( document ).ready(function() {
+			var $listeregion = document.getElementById("listregions");
+			$listeregion.innerHTML = "<option value=''>Selectionnez une région</option>";
+			indiceregion.forEach(indiceregion => {
+			const $opt =  document.createElement("option");
+			$opt.value = indiceregion.numRegion;
+			$opt.textContent = indiceregion.Nom;
+			$listeregion.appendChild($opt);
+
+			})
+		});
+			
+		</script>
+		<script>
+		//recupere le modal
+		var modal = document.getElementById("myModal");
+
+		//recupere la croix pour fermer le modal
+		var span = document.getElementsByClassName("close")[0];
+
+		//fermer modal si click sur la croix
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		//fermer modal si click sur "ok"
+		btnDelete.onclick = function() {
+			modal.style.display = "none";
+		}
+		</script>
+	</body>
+</html> 	
